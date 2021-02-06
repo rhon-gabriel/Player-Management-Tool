@@ -1,27 +1,37 @@
-const cuid = require('cuid');
-const express = require('express');
-const bodyParser = require('body-parser')
+const cuid = require("cuid");
+const express = require("express");
+const bodyParser = require("body-parser");
 const app = express();
+import { AvatarGenerator } from "random-avatar-generator";
+const generator = new AvatarGenerator();
 
 /* Setup express middlewares */
 app.use(bodyParser.json());
 app.use(allowCorsMiddleware);
 
 /* API */
-app.get('/players', getPlayers);
-app.get('/player/:id', getPlayer);
-app.put('/player/:id', putPlayer);
-app.post('/player', addPlayer);
-app.delete('/player/:id', deletePlayer);
+app.get("/players", getPlayers);
+app.get("/player/:id", getPlayer);
+app.put("/player/:id", putPlayer);
+app.post("/player", addPlayer);
+app.delete("/player/:id", deletePlayer);
 
 /* Start server */
-app.listen(3001, () => console.log('app listening on port 3001.'))
+app.listen(3001, () => console.log("app listening on port 3001."));
 
 /* The mock 'database' */
 let players = [
-  { id: 'cjeodaus60000poul1g030oia', name: 'Richard Garfield' },
-  { id: 'cjeodaus60001poule3wjdz1p', name: 'Gabe Newell' },
+  { id: "cjeodaus60000poul1g030oia", name: "Richard Garfield" },
+  { id: "cjeodaus60001poule3wjdz1p", name: "Gabe Newell" },
+  { id: "cjeodaus60000poul1g030oir", name: "Mario Sr" },
+  { id: "cjeodaus60001poule3wjdz1t", name: "Super Sonic" },
+  { id: "cjeodaus60001poule3wjdz1e", name: "Gabe Newell" },
+  { id: "cjeodaus60000poul1g030oig", name: "Mario Sr" },
 ];
+
+players.map(el => {
+  el.avatar = generator.generateRandomAvatar()
+})
 
 /* IMPLEMENTATION DETAILS */
 
@@ -36,7 +46,7 @@ function getPlayers(req, res) {
  */
 function getPlayer(req, res) {
   const id = req.params.id;
-  const player = players.find(p => p.id == id);
+  const player = players.find((p) => p.id == id);
   return player ? res.status(200).json(player).end() : res.status(404).end();
 }
 /* Add a new player to the list
@@ -45,7 +55,7 @@ function getPlayer(req, res) {
 function addPlayer(req, res) {
   const name = req.body.name;
   if (!name) {
-    return res.status(401).end()
+    return res.status(401).end();
   }
   const newPlayer = { id: cuid(), name };
   players = [...players, newPlayer];
@@ -56,8 +66,8 @@ function addPlayer(req, res) {
  */
 function deletePlayer(req, res) {
   const id = req.params.id;
-  const removedPlayer = players.find(p => p.id == id);
-  players = players.filter(p => p.id != id);
+  const removedPlayer = players.find((p) => p.id == id);
+  players = players.filter((p) => p.id != id);
   return res.status(200).json(removedPlayer).end();
 }
 /* Edit an existing player in the list
@@ -70,8 +80,11 @@ function putPlayer(req, res) {
   if (!name) {
     return res.status(400).end();
   }
-  players = players.map(p => p.id == id ? { ...p, name } : p);
-  return res.status(200).json(players.find(p => p.id == id)).end();
+  players = players.map((p) => (p.id == id ? { ...p, name } : p));
+  return res
+    .status(200)
+    .json(players.find((p) => p.id == id))
+    .end();
 }
 
 /* MISC */
@@ -79,6 +92,10 @@ function putPlayer(req, res) {
 /* Add CORS-headers to every request */
 function allowCorsMiddleware(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  res.header("Access-Control-Allow-Methods", "PUT, POST, GET, DELETE, OPTIONS");
   next();
 }
