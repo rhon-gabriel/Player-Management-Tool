@@ -1,0 +1,92 @@
+:global {
+  .ant-dropdown-menu {
+    border-radius: 20px !important;
+    font-size: 18px;
+    padding: 8px !important;
+    background-color: transparent !important;
+    border: 1px solid turquoise;
+    color: turquoise;
+    margin: 10px !important;
+  }
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  :global {
+    .ant-input {
+      background-color: whitesmoke;
+      border: 2px solid #92fe9d;
+    }
+    .ant-input[disabled] {
+      background-color: transparent;
+      color: #92fe9d;
+      border-color: transparent;
+    }
+  }
+
+  .card {
+    position: relative;
+    border-radius: 12px;
+    width: 350px;
+    height: 500px;
+    padding: 10px 20px;
+    box-shadow: 3px 4px 10px -2px gray;
+    border-top-right-radius: 8px;
+    background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+    overflow-y: scroll;
+  }
+
+  .ellipsisIcon {
+    float: right;
+    color: #fbd786;
+    font-size: 20px;
+    :hover {
+        transform: scale(1.05);
+    }
+  }
+
+  .avatar {
+    border-radius: 12px;
+    width: 100%;
+  }
+
+  .name {
+    margin-top: 3vh;
+    font-size: 25px;
+    border-radius: 12px;
+    background: linear-gradient(to right, #74ebd5, #acb6e5);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .bottomContainer {
+    display: flex;
+    justify-content: space-between;
+  }
+  .delete {
+    font-size: 24px;
+    color: #d76d77;
+    :hover {
+        transform: scale(1.05);
+    }
+  }
+  .edit {
+    font-size: 24px;
+    color: #4286f4;
+    :hover {
+        transform: scale(1.05);
+    }
+  }
+
+  .buttonCancel {
+    border-radius: 10px;
+    border: 1px solid #d76d77 !important;
+  }
+
+  .buttonSubmit {
+    border: 1px solid #4286f4;
+    border-radius: 10px;
+  }
+}
