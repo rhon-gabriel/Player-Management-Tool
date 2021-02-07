@@ -9,9 +9,7 @@ const HomePage = () => {
       <Col span={24}>
         <Link to="/players">
           <div className={styles.btnContainer}>
-            <Button type="text">
-              {'ready to play ?'}
-            </Button>
+            <Button type="text">start</Button>
           </div>
         </Link>
       </Col>

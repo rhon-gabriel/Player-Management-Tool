@@ -16,7 +16,14 @@ import {
   DELETE_PLAYER_SUCCESS,
   DELETE_PLAYER_FAILURE,
 } from "./constants";
-import { getPlayers, updatePlayer, deletePlayer, addPlayer, getPlayer } from "helpers/api/players";
+import {
+  getPlayers,
+  updatePlayer,
+  deletePlayer,
+  addPlayer,
+  getPlayer,
+} from "helpers/api/players";
+import { message } from "antd";
 
 function* getPlayersSaga() {
   try {
@@ -30,6 +37,7 @@ function* getPlayersSaga() {
       type: GET_PLAYERS_FAILURE,
       error,
     });
+    message.error("Something went wrong");
   }
 }
 
@@ -40,14 +48,16 @@ export function* updatePlayerSaga(action) {
       type: UPDATE_PLAYER_SUCCESS,
       results: res.data,
     });
+    message.success("Player updated");
     yield put({
-      type: GET_PLAYERS_START
+      type: GET_PLAYERS_START,
     });
   } catch (error) {
     yield put({
       type: UPDATE_PLAYER_FAILURE,
       error,
     });
+    message.error("Something went wrong");
   }
 }
 
@@ -58,14 +68,16 @@ export function* addPlayerSaga(action) {
       type: ADD_PLAYER_SUCCESS,
       results: res.data,
     });
+    message.success("Player added");
     yield put({
-      type: GET_PLAYERS_START
+      type: GET_PLAYERS_START,
     });
   } catch (error) {
     yield put({
       type: ADD_PLAYER_FAILURE,
       error,
     });
+    message.error("Something went wrong");
   }
 }
 
@@ -81,6 +93,7 @@ export function* getPlayerSaga(action) {
       type: GET_PLAYER_FAILURE,
       error,
     });
+    message.error("Something went wrong");
   }
 }
 
@@ -91,14 +104,16 @@ export function* deletePlayerSaga(action) {
       type: DELETE_PLAYER_SUCCESS,
       results: res.data,
     });
+    message.success("Player deleted");
     yield put({
-      type: GET_PLAYERS_START
+      type: GET_PLAYERS_START,
     });
   } catch (error) {
     yield put({
       type: DELETE_PLAYER_FAILURE,
       error,
     });
+    message.error("Something went wrong");
   }
 }
 

@@ -28,6 +28,7 @@ const AddPlayer = ({ isModalVisible, setIsModalVisible }) => {
         title="New player"
         visible={isModalVisible}
         footer={null}
+        forceRender
         onCancel={handleCancel}
       >
         <Form form={form} onFinish={onFinish}>

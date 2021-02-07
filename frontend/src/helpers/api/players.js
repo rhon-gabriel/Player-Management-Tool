@@ -10,24 +10,26 @@ export async function getPlayer(id) {
 
 export async function updatePlayer({ id, values }) {
   return await axios({
-    method: 'PUT',
+    method: "PUT",
     url: `http://localhost:3001/player/${id}`,
     data: values,
     headers: {
-        "Content-Type": "application/json",
-    }})
+      "Content-Type": "application/json",
+    },
+  });
 }
 
 export async function deletePlayer(id) {
-  return await axios.delete(`http://localhost:3001/player/${id}`)
+  return await axios.delete(`http://localhost:3001/player/${id}`);
 }
 
 export async function addPlayer(values) {
   return await axios({
-    method: 'POST',
+    method: "POST",
     url: `http://localhost:3001/player`,
     data: values,
     headers: {
-        "Content-Type": "application/json",
-    }})
+      "Content-Type": "application/json",
+    },
+  });
 }

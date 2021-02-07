@@ -1,6 +1,6 @@
 html,
 body,
-#root, .app {
-  height: 100vh; 
-  font-family: 'Montserrat', sans-serif;
+#root {
+  height: 100vh;
+  font-family: "Montserrat", sans-serif;
 }

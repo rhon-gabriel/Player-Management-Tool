@@ -2,23 +2,26 @@ import React from "react";
 import Players from "../Players/Players";
 import Header from "../Header/Header";
 import { Layout } from "antd";
-import styles from "./AppContainer.module.scss";
 
 const AppContainer = () => {
   return (
-    <Layout className={"app"} style={{ height: "100vh" }}>
-      <Layout.Header className={styles.header}>
+    <Layout style={{ height: "100vh" }}>
+      <Layout.Header
+        style={{
+          backgroundColor: "#203a43",
+        }}
+      >
         <Header />
       </Layout.Header>
-      <Layout.Content className={styles.content}>
+      <Layout.Content style={{ height: "50%" }}>
         <Players />
       </Layout.Content>
-      <Layout.Footer className={styles.footer}>
+      <Layout.Footer style={{ backgroundColor: "#134E5E" }}>
         <a
           target="_blank"
           rel="noopener noreferrer"
           href="https://www.linkedin.com/in/rhoneilgabriel/"
-          className={styles.footerText}
+          style={{ color: "#73C8A9", float: "right" }}
         >
           Rhoneil Gabriel
         </a>

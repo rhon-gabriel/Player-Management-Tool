@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import * as actions from "./redux/actions";
 import styles from "./Players.module.scss";
 import { Row, Col, Alert } from "antd";
+import { useHistory, useRouteMatch } from "react-router-dom";
 import PlayerCard from "./PlayerCard/PlayerCard";
 import PlayersList from "./PlayersList/PlayersList";
 import AddPlayer from "./AddPlayer/AddPlayer";
@@ -12,15 +13,27 @@ const Players = () => {
   const { results, player, loading, error } = useSelector(
     (state) => state.players
   );
+  const history = useHistory();
+  const { url } = useRouteMatch();
   const dispatch = useDispatch();
 
   const showModal = () => {
     setIsModalVisible(true);
   };
 
+  const isPlayerSelected = (player) => {
+    if(player == null) {
+      history.push(`${url}`);
+    }
+  }
+
   useEffect(() => {
     dispatch(actions.getPlayers());
   }, []); // eslint-disable-line
+
+  useEffect(() => {
+    isPlayerSelected(player)
+  }, [player]); // eslint-disable-line
 
   return (
     <div className={styles.container}>
