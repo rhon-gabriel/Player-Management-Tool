@@ -1,20 +1,10 @@
-:global {
-  .ant-dropdown-menu {
-    border-radius: 20px !important;
-    font-size: 18px;
-    padding: 8px !important;
-    background-color: transparent !important;
-    border: 1px solid turquoise;
-    color: turquoise;
-    margin: 10px !important;
-  }
-}
-
 .container {
   display: flex;
   justify-content: center;
-  align-items: center;
   height: 100%;
+  position: relative;
+  background-color: #203a43;
+  border-bottom-right-radius: 50px;
   :global {
     .ant-input {
       background-color: whitesmoke;
@@ -28,24 +18,18 @@
   }
 
   .card {
-    position: relative;
     border-radius: 12px;
     width: 350px;
     height: 500px;
     padding: 10px 20px;
-    box-shadow: 3px 4px 10px -2px gray;
+    box-shadow: 3px 4px 10px -2px #73c8a9;
     border-top-right-radius: 8px;
     background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
     overflow-y: scroll;
-  }
-
-  .ellipsisIcon {
-    float: right;
-    color: #fbd786;
-    font-size: 20px;
-    :hover {
-        transform: scale(1.05);
-    }
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -40%);
   }
 
   .avatar {
@@ -69,14 +53,14 @@
     font-size: 24px;
     color: #d76d77;
     :hover {
-        transform: scale(1.05);
+      transform: scale(1.05);
     }
   }
   .edit {
     font-size: 24px;
     color: #4286f4;
     :hover {
-        transform: scale(1.05);
+      transform: scale(1.05);
     }
   }
 

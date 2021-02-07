@@ -1,34 +1,31 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import * as actions from "../redux/actions";
 import styles from "./PlayerCard.module.scss";
-import { Form, Input, Button, Dropdown } from "antd";
-import {
-  EditOutlined,
-  EllipsisOutlined,
-  DeleteOutlined,
-} from "@ant-design/icons";
+import { Form, Input, Button } from "antd";
+import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import SpinLoader from "../../UiElement/SpinLoader/SpinLoader";
 import Popup from "../../UiElement/Popup/Popup";
 
-const PlayerCard = ({ selectedPlayer, loading }) => {
+const PlayerCard = () => {
+  const { player, loading } = useSelector((state) => state.players);
   const [isEditing, setIsEditing] = useState(false);
   const dispatch = useDispatch();
   const [form] = Form.useForm();
 
   useEffect(() => {
-    selectedPlayer && form.resetFields();
-  }, [selectedPlayer]); // eslint-disable-line
+    player && form.resetFields();
+  }, [player]); // eslint-disable-line
 
   const onFinish = (values) => {
-    const id = selectedPlayer?.id;
+    const id = player?.id;
     dispatch(actions.updatePlayer({ id, values }));
     setIsEditing(false);
   };
 
-  function confirm(e) {
-    console.log(e);
-  }
+  const confirm = (id) => {
+    dispatch(actions.deletePlayer(id));
+  };
 
   return (
     <div className={styles.container}>
@@ -36,33 +33,27 @@ const PlayerCard = ({ selectedPlayer, loading }) => {
         {loading ? (
           <SpinLoader />
         ) : (
-          selectedPlayer && (
+          player && (
             <Form
-              key={selectedPlayer.id}
+              key={player.id}
               form={form}
-              initialValues={selectedPlayer}
+              initialValues={player}
               onFinish={onFinish}
             >
               <div>
-                <Dropdown
-                  placement="topCenter"
-                  overlay={<Button>See more</Button>}
-                >
-                  <EllipsisOutlined
-                    className={styles.ellipsisIcon}
-                    key="ellipsis"
-                  />
-                </Dropdown>
                 <img
                   alt="avatar"
                   className={styles.avatar}
-                  src={selectedPlayer.avatar}
+                  src={player.avatar}
                 />
                 <Form.Item name="name">
                   <Input className={styles.name} disabled={!isEditing}></Input>
                 </Form.Item>
                 <div className={styles.bottomContainer}>
-                  <Popup className={styles.delete} onConfirm={confirm}>
+                  <Popup
+                    className={styles.delete}
+                    onConfirm={() => confirm(player.id)}
+                  >
                     <DeleteOutlined />
                   </Popup>
                   {!isEditing && (

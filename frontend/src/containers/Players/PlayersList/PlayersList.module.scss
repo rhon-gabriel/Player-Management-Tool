@@ -1,0 +1,68 @@
+.container {
+  position: relative;
+  font-family: "Montserrat", sans-serif;
+  height: 100%;
+  background-color: #134e5e;
+  border-top-left-radius: 50px;
+
+  .listHeader {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    .title {
+      padding: 10px 30px;
+      font-size: 30px;
+      background: linear-gradient(to right, #74ebd5, #acb6e5);
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .addBtn {
+      padding: 20px;
+      font-size: 25px;
+      color: #acb6e5;
+    }
+  }
+
+  .cardContainer {
+    overflow-y: scroll;
+    height: 400px;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 10px 20px;
+    :hover {
+      transform: scale(1.03);
+    }
+    .card {
+      position: relative;
+      border-radius: 12px;
+      box-shadow: 3px 3px 6px -2px #acb6e5;
+      background: linear-gradient(to right, #2980b9, #2c3e50);
+      width: 140px;
+      height: 140px;
+      margin: 10px 15px;
+      text-align: center;
+      border-radius: 10px;
+      display: flex;
+      justify-content: center;
+      padding: 10px;
+      .cardContent {
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+      }
+      .avatar {
+        height: 10px;
+      }
+      .name {
+        padding: 8px;
+        font-size: 14px;
+        width: 100px;
+        overflow: auto;
+        background: linear-gradient(to right, #74ebd5, #acb6e5);
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+    }
+  }
+}

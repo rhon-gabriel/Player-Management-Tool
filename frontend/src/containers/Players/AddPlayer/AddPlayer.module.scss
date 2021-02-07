@@ -1,0 +1,67 @@
+:global {
+  .modal {
+    .ant-modal-header {
+      border-top-right-radius: 10px;
+      border-top-left-radius: 10px;
+      background: linear-gradient(to right, #be93c5, #7bc6cc);
+    }
+    .ant-modal-title {
+      color: #fff;
+      font-weight: 200;
+      font-size: 18px;
+    }
+    .anticon {
+      color: #f80759;
+    }
+    .ant-modal-content {
+      border-radius: 10px;
+      background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+      height: 300px;
+      position: relative;
+    }
+    .ant-modal-body {
+      padding: 50px 24px;
+    }
+    .ant-input-affix-wrapper {
+      height: 50px;
+      border-radius: 10px;
+      border: 2px solid #7bc6cc !important;
+      background-color: transparent;
+    }
+    .ant-input {
+      font-size: 18px;
+      background-color: transparent;
+    }
+    .ant-input-affix-wrapper > input.ant-input {
+      color: #fff;
+      font-weight: 200;
+    }
+    .ant-btn {
+      border-radius: 10px;
+    }
+    .ant-btn > span {
+      color: #fff;
+      font-size: 16px;
+      padding: 0px;
+    }
+  }
+}
+
+.bottomContainer {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding: 20px;
+}
+
+.buttonCancel {
+  border-radius: 10px;
+  border: 1px solid #d76d77 !important;
+  background-color: #d76d77 !important;
+}
+
+.buttonSubmit {
+  border: 1px solid #4286f4;
+  border-radius: 10px;
+  background-color: #4286f4 !important;
+}

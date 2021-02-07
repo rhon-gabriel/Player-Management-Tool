@@ -1,2 +1,8 @@
-.container {
+:global {
+  .ant-btn > span {
+    background: linear-gradient(to right, #74ebd5, #acb6e5);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 15px;
+  }
 }

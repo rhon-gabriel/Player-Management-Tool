@@ -2,82 +2,46 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import * as actions from "./redux/actions";
 import styles from "./Players.module.scss";
-import { Row, Col, Button, Avatar, Alert } from "antd";
-import { CloseCircleOutlined } from "@ant-design/icons";
+import { Row, Col, Alert } from "antd";
 import PlayerCard from "./PlayerCard/PlayerCard";
-import SpinLoader from "../UiElement/SpinLoader/SpinLoader";
-import Popup from "../UiElement/Popup/Popup";
+import PlayersList from "./PlayersList/PlayersList";
+import AddPlayer from "./AddPlayer/AddPlayer";
 
 const Players = () => {
-  const { results, loading, error } = useSelector((state) => state.players);
-  const [selectedPlayer, setSelectedPlayer] = useState();
-  const [isReady, setIsReady] = useState(false);
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const { results, player, loading, error } = useSelector(
+    (state) => state.players
+  );
   const dispatch = useDispatch();
+
+  const showModal = () => {
+    setIsModalVisible(true);
+  };
 
   useEffect(() => {
     dispatch(actions.getPlayers());
   }, []); // eslint-disable-line
 
-  const onSelect = (player) => {
-    setSelectedPlayer(player);
-  };
-
-  function confirm(e) {
-    console.log(e);
-  }
-
   return (
     <div className={styles.container}>
-      <Row style={{ height: "100%" }}>
-        {!isReady ? (
+      <Row className={styles.row}>
+        {error && (
           <Col span={24}>
-            {error && <Alert message="Something went wrong" type="error" />}
-            <div className={styles.btnContainer}>
-              <Button onClick={() => setIsReady(true)}>Ready to play?</Button>
-            </div>
+            <Alert message="Something went wrong" type="error" />
           </Col>
-        ) : (
-          <>
-            <Col span={24}>
-              {error && <Alert message="Something went wrong" type="error" />}
-            </Col>
-            <Col span={10}>
-              {selectedPlayer && (
-                <PlayerCard selectedPlayer={selectedPlayer} loading={loading} />
-              )}
-            </Col>
-            <Col span={14} className={styles.selectPlayer}>
-              <h1 className={styles.title}>Select a player</h1>
-              <div className={styles.cardContainer}>
-                {loading ? (
-                  <SpinLoader />
-                ) : (
-                  results &&
-                  results.map((player) => {
-                    return (
-                      <div key={player.id} className={styles.card}>
-                        <Popup className={styles.close} onConfirm={confirm}>
-                          <CloseCircleOutlined />
-                        </Popup>
-                        <div
-                          className={styles.cardContent}
-                          onClick={() => onSelect(player)}
-                        >
-                          <Avatar
-                            className={styles.avatar}
-                            size={70}
-                            src={player.avatar}
-                          />
-                          <div className={styles.name}>{player.name}</div>
-                        </div>
-                      </div>
-                    );
-                  })
-                )}
-              </div>
-            </Col>
-          </>
         )}
+        <Col span={10}>{player && <PlayerCard />}</Col>
+        <Col span={14} className={styles.selectPlayer}>
+          <AddPlayer
+            setIsModalVisible={setIsModalVisible}
+            isModalVisible={isModalVisible}
+          />
+          <PlayersList
+            results={results}
+            loading={loading}
+            showModal={showModal}
+          />
+        </Col>
       </Row>
     </div>
   );
