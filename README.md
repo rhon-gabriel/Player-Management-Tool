@@ -3,6 +3,9 @@
 Simple player management tool that allow to get a list of player, access, edit and delete
 a player.
 
+<img width="1440" alt="Screenshot 2021-05-24 at 12 46 22" src="https://user-images.githubusercontent.com/46671316/119337277-eba88580-bc8e-11eb-96c3-eab63e6ee843.png">
+
+
 ## Tech stack
 - React
 - Redux/Saga
